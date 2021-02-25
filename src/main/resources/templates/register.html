@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/html">
+<head>
+    <!-- Bootstrap -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/8d5f87f348.js" crossorigin="anonymous"></script>
+    <link href="style.css" rel="stylesheet">
+    <title>Register User</title>
+</head>
+
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/"><i class="fas fa-road fa-2x" style="color: hotpink"></i></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">Team Profile</a>
+                </li>
+                <li class="nav-item">
+                    <th th:if = "${user != null}">
+                        <a class="nav-link" href="/logout">Log Out</a>
+                    </th>
+                    <th th:unless = "${user != null}">
+                        <a class="nav-link active" href="/login">Log In</a>
+                    </th>
+                </li>
+                <th th:if="${user != null}">
+                    <li class="nav-item">
+                        <p class="nav-link" style="color: hotpink">
+                            Logged in as:
+                            <span th:text="${user.username}"></span>
+                        </p>
+                    </li>
+                </th>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Register box -->
+<div class="container-fluid padding">
+    <div class="row welcome text-center">
+        <div class="col-12">
+            <h1 class="display-4">Register User</h1>
+        </div>
+        <hr>
+    </div>
+    <div class="container-fluid padding" style="width: 75%">
+        <form name="register" action="/register" method="POST">
+        <div class="row padding text-center">
+            <div class="col-sm-12 col-lg-4">
+                <p class="lead">Enter username:</p>
+                <input type="text" name="username" placeholder="Username..." required>
+            </div>
+            <div class="col-sm-12 col-lg-4">
+                <p class="lead">Enter your first name:</p>
+                <input type="text" name="firstName" placeholder="First name..." required>
+            </div>
+            <div class="col-sm-12 col-lg-4">
+                <p class="lead">Enter your last name:</p>
+                <input type="text" name="lastName" placeholder="Last name..." required>
+            </div>
+        </div>
+        <div class="row text-center padding">
+            <div class="col-sm-12 col-lg-6">
+                <p class="lead">Enter password:</p>
+                <input type="password" name="pw" placeholder="Password..." required>
+            </div>
+            <div class="col-sm-12 col-lg-6">
+                <p class="lead">Confirm password:</p>
+                <input type="password" name="pw2" placeholder="..." required>
+            </div>
+        </div>
+        <div class="row padding text-center">
+            <div class="col-12" style="color: darkred">
+                <th th:if="${error != null}">
+                    <th th:text="${error}"></th>
+                </th>
+            </div>
+        </div>
+        <div class="row text-center padding">
+            <div class="col-12">
+                <input type="submit" class="btn btn-primary btn-lg" value="Register">
+            </div>
+        </div>
+        </form>
+
+        <div class="row welcome text-center padding">
+            <hr>
+            <div class="col-12">
+                <p class="lead">Already registered? Click <a href="/login">here</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--- Footer -->
+<footer>
+    <div class="container-fluid padding">
+        <div class="row text-center">
+            <div class="col-md-4">
+                <hr class="light">
+                <h5>Created By</h5>
+                <hr class="light">
+                <p>Mr. Dickville</p>
+            </div>
+            <div class="col-md-4" style="margin: auto">
+                <hr class="light">
+                <i class="fas fa-road" style="color: hotpink"></i>
+                <hr class="light">
+                <p>Road To Pink</p>
+            </div>
+            <div class="col-md-4">
+                <hr class="light">
+                <h5>Other Links</h5>
+                <hr class="light">
+                <p>Facebook group  <a href="https://www.facebook.com/groups/526710621293900"><i class="fab fa-facebook-f fa-large"></i></a></p>
+            </div>
+            <div class="col-12">
+                <hr class="light">
+                <h5>&copy; Dickville Hornets 2020</h5>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+</body>
+</html>
