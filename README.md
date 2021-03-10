@@ -1,2 +1,10 @@
 # springmvc-rtp
-Hobby project - Creating an interactive website with Spring MVC architecture. Using Docker to run images of the Spring Boot project, and a MySQL server. Continous implementation via. Jenkins on an Ubuntu Linux server hosted on AWS.
+### Hobby project: Building a fully interactive website from scratch with database functionality.
+
+* Using HTML and CSS with Bootstrap 5 and JS + jQuery elements to build front-end.
+* Using SpringBoot to implement a Spring MVC architechture including JPA to control database related actions.
+* Using an Ubuntu Linux server hosted on AWS.
+* Using Docker to run images of a MySQL server as well as the SpringProject.
+* Using Jenkins for continuous implementation.
+
+### Check roadtopink.rskovbo.dk for latest version.. *Note - May not be up 24/7*
