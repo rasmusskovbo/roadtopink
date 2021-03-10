@@ -56,23 +56,73 @@
         </div>
         <hr>
     </div>
-
-    <div class="card col-xs-12 col-sm-12 col-md-3 col-lg-3 padding">
-        <div class="card-body">
-            <div>
-                <h4 class="profile-headers">Username</h4>
-                <p th:text="${user.username}"></p>
-            </div>
-            <div>
-                <h4 class="profile-headers">Name</h4>
-                <div class="row">
-                    <p>
-                        <th th:text="${user.firstName}"></th>
-                        <th th:text="${user.lastName}"></th>
-                    </p>
+    <!-- User overview -->
+    <div class="row welcome">
+        <div class="card col-xs-12 col-sm-12 col-md-3 col-lg-3 padding">
+            <div class="card-body">
+                <div>
+                    <h4 class="profile-headers">Username</h4>
+                    <p th:text="${user.username}"></p>
+                </div>
+                <div>
+                    <h4 class="profile-headers">Name</h4>
+                    <div class="row">
+                        <p>
+                            <th th:text="${user.firstName}"></th>
+                            <th th:text="${user.lastName}"></th>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
+        <!-- Team overview -->
+        <!-- Loads if team is registered to user -->
+        <th th:if="${team != null}">
+        <div class="card col-xs-12 col-sm-12 col-md-9 col-lg-9 padding">
+            <div class="card-body">
+                <div>
+                    <h4 class="profile-headers">Team Name</h4>
+                    <p th:text="${team.teamName}"></p>
+                </div>
+                <!-- Additional stats, not yet implemented
+                <div>
+                    <h4 class="profile-headers">Name</h4>
+                    <div class="row">
+                        <p>
+                        <th th:text="${user.firstName}"></th>
+                        <th th:text="${user.lastName}"></th>
+                        </p>
+                    </div>
+                </div>
+                -->
+            </div>
+        </div>
+        </th>
+        <!-- Loads if NO TEAM is available -->
+        <th th:unless="${team != null}">
+        <div class="card col-xs-12 col-sm-12 col-md-9 col-lg-9 padding">
+            <div class="card-body">
+                <div>
+                    <h4 class="profile-headers text-center">No team registered for this user - Register below</h4>
+                </div>
+            </div>
+            <div class="container-fluid padding" style="width: 75%">
+                <form name="register" action="/registerTeam" method="POST">
+                    <div class="row text-center">
+                        <div class="col-12">
+                            <p class="lead">Enter team name:</p>
+                            <input class="col-12" type="text" name="teamName" placeholder="Team name..." required>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-12">
+                            <input type="submit" class="btn btn-primary" value="Register team">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        </th>
     </div>
 </div>
 

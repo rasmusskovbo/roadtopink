@@ -118,6 +118,7 @@ hr.light {
 
 
 
+
 /*---Media Queries --*/
 @media (max-width: 992px) {
 
@@ -165,6 +166,18 @@ hr.light {
   .btn-primary:hover {
     background-color: lightpink;
     border: 1px solid #563d7c;
+  }
+
+  .btn {
+    font-size: small;
+  }
+
+  .card {
+    font-size: small;
+  }
+
+  .card-body {
+    font-size: small;
   }
 }
 

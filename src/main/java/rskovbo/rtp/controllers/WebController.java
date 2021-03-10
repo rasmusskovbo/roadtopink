@@ -3,12 +3,12 @@ package rskovbo.rtp.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
+import rskovbo.rtp.model.team.Team;
 import rskovbo.rtp.model.user.User;
-import rskovbo.rtp.service.user.UserService;
+import rskovbo.rtp.service.user.DataService;
 import rskovbo.rtp.service.user.UsernameAlreadyExists;
 
 import javax.security.auth.login.LoginException;
@@ -16,16 +16,16 @@ import javax.security.auth.login.LoginException;
 @Controller
 public class WebController {
 
-    private final UserService userService;
+    private final DataService dataService;
 
     @Autowired
-    public WebController(UserService userService) {
-        this.userService = userService;
+    public WebController(DataService dataService) {
+        this.dataService = dataService;
     }
 
     @GetMapping("/")
     public String welcome(Model model, WebRequest request) {
-        packUser(model, request);
+        packView(model, request);
         return "index";
     }
 
@@ -37,14 +37,14 @@ public class WebController {
 
     @GetMapping("/register")
     public String goToRegisterSite(Model model, WebRequest request) {
-        packUser(model, request);
+        packView(model, request);
         return "register";
     }
 
     @GetMapping("/profile")
     public String goToProfile(Model model, WebRequest request) {
         try {
-            packUser(model, request);
+            packView(model, request);
             if (model.getAttribute("user") == null) throw new NullPointerException();
         } catch (NullPointerException e){
             return "redirect:/login";
@@ -59,7 +59,7 @@ public class WebController {
             String username = request.getParameter("username");
             String pw = request.getParameter("pw");
 
-            User user = userService.login(username, pw);
+            User user = dataService.login(username, pw);
 
             setSessionInfo(request, user);
         } catch (LoginException e) {
@@ -79,7 +79,7 @@ public class WebController {
     @PostMapping("/register")
     public String registerUser(WebRequest request, User user, Model model) {
         try {
-            model.addAttribute("user", userService.registerUser(user));
+            model.addAttribute("user", dataService.registerUser(user));
             setSessionInfo(request, user);
             return "profile";
         } catch (UsernameAlreadyExists e) {
@@ -88,14 +88,29 @@ public class WebController {
         }
     }
 
+    @PostMapping("/registerTeam")
+    public String registerTeam(WebRequest request, Team team) {
+        Team teamForID = dataService.registerTeam(team);
+        User userToUpdate = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        dataService.setTeam(teamForID, userToUpdate);
+        return "redirect:/profile";
+    }
+
     private void setSessionInfo(WebRequest request, User user) {
         // Place user info on session
         request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
         request.setAttribute("id", user.getId(), WebRequest.SCOPE_SESSION);
     }
 
-    private void packUser(Model model, WebRequest request) {
+    private void packView(Model model, WebRequest request) {
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        try {
+            Team team = dataService.getTeam(user.getTeamID());
+            System.out.println(team.getTeamName());
+            model.addAttribute("team", team);
+        } catch (Exception ignored) {
+
+        }
         model.addAttribute("user", user);
     }
 

@@ -23,6 +23,7 @@ public class User {
     @Column(nullable = false)
     private String lastName;
 
+    @Column
     private Long teamID;
 
     public User() {
@@ -74,6 +75,14 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Long getTeamID() {
+        return teamID;
+    }
+
+    public void setTeamID(Long teamID) {
+        this.teamID = teamID;
     }
 
     @Override

@@ -18,7 +18,7 @@ import static org.mockito.Mockito.times;
 class UserServiceTest {
 
     @InjectMocks
-    UserService userService;
+    DataService dataService;
 
     @Mock
     UserRepository userRepository;

@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
+import rskovbo.rtp.model.team.Team;
 import rskovbo.rtp.model.user.User;
+import rskovbo.rtp.repository.TeamRepository;
 import rskovbo.rtp.repository.UserRepository;
 
 import javax.security.auth.login.LoginException;
@@ -15,13 +17,15 @@ import java.util.Optional;
 
 
 @Service
-public class UserService  {
+public class DataService {
 
     private final UserRepository userRepository;
+    private final TeamRepository teamRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public DataService(UserRepository userRepository, TeamRepository teamRepository) {
         this.userRepository = userRepository;
+        this.teamRepository = teamRepository;
     }
 
     public List<User> getUsers() {
@@ -40,6 +44,10 @@ public class UserService  {
         return userRepository.save(user);
     }
 
+    public Team registerTeam(Team team) {
+        return teamRepository.save(team);
+    }
+
     public User login(String username, String password) throws LoginException {
         Optional<User> userOptional = userRepository.findUserByUsernameAndPw(username, password);
         if (userOptional.isEmpty()) {
@@ -51,6 +59,17 @@ public class UserService  {
 
     public User getUser(Long id) {
         return userRepository.getOne(id);
+    }
+
+    public User setTeam(Team team, User user) {
+        userRepository.getOne(user.getId());
+        user.setTeamID(team.getId());
+        userRepository.save(user);
+        return user;
+    }
+
+    public Team getTeam(Long teamID) {
+        return teamRepository.getOne(teamID);
     }
 
 
