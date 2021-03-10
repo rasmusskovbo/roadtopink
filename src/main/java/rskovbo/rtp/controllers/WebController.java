@@ -62,10 +62,9 @@ public class WebController {
             User user = userService.login(username, pw);
 
             setSessionInfo(request, user);
-
         } catch (LoginException e) {
             model.addAttribute("error", e.getMessage());
-            return "/login";
+            return "login";
         }
         return "redirect:/profile";
     }
