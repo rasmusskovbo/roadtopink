@@ -42,11 +42,14 @@ public class UserService  {
 
     public User login(String username, String password) throws LoginException {
         Optional<User> userOptional = userRepository.findUserByUsernameAndPw(username, password);
+        boolean flag = false;
         if (userOptional.isEmpty()) {
+            flag = true;
+        }
+        while (flag) {
             throw new LoginException("Username or password did not match");
         }
         Long id = userOptional.get().getId();
-        System.out.println(id);
         return userRepository.getOne(id);
     }
 

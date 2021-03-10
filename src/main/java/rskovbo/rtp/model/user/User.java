@@ -23,6 +23,8 @@ public class User {
     @Column(nullable = false)
     private String lastName;
 
+    private Long teamID;
+
     public User() {
     }
 
