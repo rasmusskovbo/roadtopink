@@ -89,26 +89,28 @@
             <h1 class="display-4">The Road To Pink League</h1>
         </div>
         <hr>
-        <div class="col-12">
-            <div class="table-responsive" th:if="${not#lists.isEmpty(users)}">
-                <table class="table table-hover table-striped">
-                    <thead class="thead-inverse">
-                    <tr>
-                        <th>Avatar</th>
-                        <th>Username</th>
-                        <th>Team name</th>
-                    </tr>
-                    </thead>
-                    <tr th:each="user : ${users}">
-                        <td>N/A</td>
-                        <td th:text="${user.username}"></td>
-                        <td th:text="${user?.team?.teamName}"></td>
-                    </tr>
-                </table>
-            </div>
+    </div>
+    <div class="col-12">
+        <div class="table-responsive" th:if="${not#lists.isEmpty(users)}">
+            <table class="table table-hover table-striped">
+                <thead class="thead-inverse">
+                <tr>
+                    <th>Avatar</th>
+                    <th>Username</th>
+                    <th>Team name</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tr th:each="user : ${users}">
+                    <td><img id="avatar" class="avatar" th:src="${user?.sleeperUser?.avatarURL}" alt="N/A"></td>
+                    <td th:text="${user.username}"></td>
+                    <td th:text="${user?.team?.teamName}" colspan="2"></td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
+
 
 <!-- Jumbotron -->
 <div class="container-fluid">
@@ -129,10 +131,11 @@
             <h1 class="display-4">A league of would-be champions.</h1>
         </div>
         <hr>
-        <div class="col-12">
-            <p class="lead">This website is a work-in-hobby-project-progress, so make sure to tune in regularly for
-                new updates and features as they become available.</p>
-        </div>
+    </div>
+    <div class="col-12 text-center">
+        <p class="lead">This website is a work-in-hobby-project-progress, so make sure to tune in regularly for
+            new updates and features as they become available.</p>
+    </div>
     </div>
 </div>
 

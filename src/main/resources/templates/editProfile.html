@@ -52,82 +52,95 @@
 <div class="container-fluid padding">
     <div class="row welcome text-center">
         <div class="col-12">
-            <h1 class="display-4">Team Profile</h1>
+            <h1 class="display-4">Edit profile</h1>
         </div>
         <hr>
     </div>
-    <!-- User overview -->
-    <div class="row welcome">
-        <div class="card col-xs-12 col-sm-12 col-md-3 col-lg-3 padding">
-            <div class="card-body">
-                <div>
-                    <h4 class="profile-headers">User</h4>
-                    <p class="col" th:text="${user.username}"></p>
-                </div>
-                <div>
-                    <h4 class="profile-headers">Name</h4>
-                    <div class="row">
-                        <p>
-                            <th th:text="${user.firstName}"></th>
-                            <th th:text="${user.lastName}"></th>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Team overview -->
-        <!-- Loads if team is registered to user -->
-        <th th:if="${user.team != null}">
-        <div class="card col-xs-12 col-sm-12 col-md-9 col-lg-9 padding">
-            <div class="card-body">
-                <div>
-                    <h4 class="profile-headers">Team Name</h4>
-                    <p th:text="${user.team.teamName}"></p>
-                </div>
 
-                <div>
-                    <h4 class="profile-headers">Sleeper Avatar</h4>
-                    <img id="avatar" class="avatar col" th:src="${user?.sleeperUser?.avatarURL}" alt="N/A">
-                </div>
-            </div>
-        </div>
-        </th>
-        <!-- Loads if NO TEAM is available -->
-        <th th:unless="${user.team != null}">
-        <div class="card col-xs-12 col-sm-12 col-md-9 col-lg-9 padding">
-            <div class="card-body">
-                <div>
-                    <h4 class="profile-headers text-center">No team registered for this user - Register below</h4>
-                </div>
-            </div>
-            <div class="container-fluid padding" style="width: 75%">
-                <form name="register" action="/registerTeam" method="POST">
-                    <div class="row text-center">
-                        <div class="col-12">
-                            <p class="lead">Enter team name:</p>
-                            <input class="col-12" type="text" name="teamName" placeholder="Team name..." required>
+    <!-- User overview -->
+    <form name="editProfile" action="/editProfile" method="POST">
+        <div class="row welcome">
+            <div class="card col-xs-12 col-sm-12 col-md-3 col-lg-3 padding">
+                <div class="card-body">
+                    <div>
+                        <h4 class="profile-headers">User</h4>
+                        <div class="col">
+                            <input type="text" name="userName" th:value="${user.username}" class="input-field" required>
                         </div>
                     </div>
-                    <div class="row text-center">
-                        <div class="col-12">
-                            <input type="submit" class="btn btn-primary" value="Register team">
+                    <div>
+                        <h4 class="profile-headers">Name</h4>
+                        <div class="row">
+                            <p>
+                                <input type="text" name="firstName" th:value="${user.firstName}" class="input-field" placeholder="First name..." required>
+                                <input type="text" name="lastName" th:value="${user.lastName}" class="input-field" placeholder="Last name..." required>
+                            </p>
                         </div>
                     </div>
-                </form>
+                </div>
+            </div>
+            <!-- Team overview -->
+            <!-- Loads if team is registered to user -->
+            <th th:if="${user.team != null}">
+            <div class="card col-xs-12 col-sm-12 col-md-9 col-lg-9 padding">
+                <div class="card-body">
+                    <div>
+                        <h4 class="profile-headers">Team Name</h4>
+                        <input type="text" name="teamName" th:value="${user.team.teamName}" class="input-field">
+                    </div>
+                    <div>
+                        <h4 class="profile-headers">Sleeper Avatar</h4>
+                        <img id="avatar" class="avatar col" th:src="${user?.sleeperUser?.avatarURL}" alt="N/A">
+                    </div>
+                </div>
+            </div>
+            </th>
+            <!-- Loads if NO TEAM is available -->
+            <th th:unless="${user.team != null}">
+            <div class="card col-xs-12 col-sm-12 col-md-9 col-lg-9 padding">
+                <div class="card-body">
+                    <div>
+                        <h4 class="profile-headers text-center">No team registered for this user - Register below</h4>
+                    </div>
+                </div>
+                <div class="container-fluid padding" style="width: 75%">
+                    <form name="register" action="/registerTeam" method="POST">
+                        <div class="row text-center">
+                            <div class="col-12">
+                                <p class="lead">Enter team name:</p>
+                                <input class="col-12" type="text" name="teamName" placeholder="Team name..." required>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-12">
+                                <input type="submit" class="btn btn-primary" value="Register team">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            </th>
+        </div>
+        <div class="row padding text-center">
+            <div class="col-12" style="color: darkred">
+                <th th:if="${error != null}">
+                    <th th:text="${error}"></th>
+                </th>
             </div>
         </div>
-        </th>
-    </div>
+        <div class="row padding text-center">
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary btn-lg">Save changes</button>
+            </div>
+        </div>
+    </form>
 </div>
 
 <!-- log out area -->
 <div class="container-fluid padding">
     <div class="row text-center welcome">
         <hr>
-        <div class="col-md-6 col-sm-12">
-            <form method="get" action="/editProfile"><button type="submit" class="btn btn-primary btn-lg">Edit profile</button></form>
-        </div>
-        <div class="col-md-6 col-sm-12">
+        <div class="col-12">
             <form method="get" action="/logout"><button type="submit" class="btn btn-primary btn-lg">Log out</button></form>
         </div>
     </div>

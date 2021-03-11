@@ -34,6 +34,20 @@ public class DataService {
         return userRepository.save(user);
     }
 
+    public User editProfile(User user) throws UsernameAlreadyExists {
+        if (!userRepository.getOne(user.getId()).getUsername().equals(user.getUsername())) {
+            Optional<User> userOptional = userRepository.findUserByUsername(user.getUsername());
+            if (userOptional.isPresent()) {
+                throw new UsernameAlreadyExists("Username already exists");
+            }
+        }
+        return userRepository.save(user);
+    }
+
+    public List<User> saveAll(List<User> users) {
+        return userRepository.saveAll(users);
+    }
+
     public User registerUser(User user) throws UsernameAlreadyExists {
         Optional<User> userOptional = userRepository.findUserByUsername(user.getUsername());
         if (userOptional.isPresent()) {

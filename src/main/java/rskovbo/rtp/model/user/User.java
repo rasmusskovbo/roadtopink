@@ -1,6 +1,7 @@
 package rskovbo.rtp.model.user;
 
 import rskovbo.rtp.model.team.Team;
+import rskovbo.rtp.rest.SleeperUser;
 
 import javax.persistence.*;
 
@@ -29,6 +30,10 @@ public class User {
     @JoinColumn(name = "team_id", referencedColumnName = "id")
     private Team team;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "sleeper_user_id", referencedColumnName = "user_id")
+    private SleeperUser sleeperUser;
+
     public User() {
     }
 
@@ -40,6 +45,15 @@ public class User {
     }
 
     //--Getters & Setters
+    public SleeperUser getSleeperUser() {
+        return sleeperUser;
+    }
+
+    public void setSleeperUser(SleeperUser sleeperUser) {
+        sleeperUser.updateAvatarURL();
+        this.sleeperUser = sleeperUser;
+    }
+
     public Long getId() {
         return id;
     }

@@ -99,6 +99,11 @@ hr.light {
   color: hotpink;
 }
 
+.input-field {
+  width: 100%;
+  max-width: 250px;
+}
+
 /* Profile Styling */
 .vl {
   border-left: 6px solid green;
@@ -112,9 +117,20 @@ hr.light {
   text-shadow: #3f3f3f;
 }
 
+/* Avatar styling */
+.avatar {
+  border-radius: 5px;
 
+  width: 50px;
+  height: auto;
+}
 
+.card-body.row.avatar {
+  border-radius: 5px;
 
+  width: 50px;
+  height: auto;
+}
 
 
 
@@ -140,6 +156,11 @@ hr.light {
 
   .carousel-caption .btn {
     font-size: 95%
+  }
+
+  .avatar {
+    width: 30px;
+    height: auto;
   }
 
 }
@@ -172,6 +193,7 @@ hr.light {
     font-size: small;
   }
 
+  /* Profile Page */
   .card {
     font-size: small;
   }
@@ -180,8 +202,14 @@ hr.light {
     font-size: small;
   }
 
+  /* Index table */
   .table-responsive {
     font-size: x-small;
+  }
+
+  .avatar {
+    width: 20px;
+    height: auto;
   }
 }
 
