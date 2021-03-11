@@ -1,9 +1,11 @@
 package rskovbo.rtp.model.user;
 
+import rskovbo.rtp.model.team.Team;
+
 import javax.persistence.*;
 
 @Table(uniqueConstraints = {@UniqueConstraint(name = "user_username_unique", columnNames = "username")})
-@Entity(name = "User")
+@Entity(name = "user")
 public class User {
     // Attributes
     @Id
@@ -23,8 +25,9 @@ public class User {
     @Column(nullable = false)
     private String lastName;
 
-    @Column
-    private Long teamID;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "team_id", referencedColumnName = "id")
+    private Team team;
 
     public User() {
     }
@@ -77,6 +80,7 @@ public class User {
         this.lastName = lastName;
     }
 
+/*
     public Long getTeamID() {
         return teamID;
     }
@@ -84,6 +88,17 @@ public class User {
     public void setTeamID(Long teamID) {
         this.teamID = teamID;
     }
+ */
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+
 
     @Override
     public String toString() {

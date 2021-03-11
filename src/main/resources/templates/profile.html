@@ -77,12 +77,12 @@
         </div>
         <!-- Team overview -->
         <!-- Loads if team is registered to user -->
-        <th th:if="${team != null}">
+        <th th:if="${user.team != null}">
         <div class="card col-xs-12 col-sm-12 col-md-9 col-lg-9 padding">
             <div class="card-body">
                 <div>
                     <h4 class="profile-headers">Team Name</h4>
-                    <p th:text="${team.teamName}"></p>
+                    <p th:text="${user.team.teamName}"></p>
                 </div>
                 <!-- Additional stats, not yet implemented
                 <div>
@@ -99,7 +99,7 @@
         </div>
         </th>
         <!-- Loads if NO TEAM is available -->
-        <th th:unless="${team != null}">
+        <th th:unless="${user.team != null}">
         <div class="card col-xs-12 col-sm-12 col-md-9 col-lg-9 padding">
             <div class="card-body">
                 <div>

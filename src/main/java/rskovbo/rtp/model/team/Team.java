@@ -1,18 +1,23 @@
 package rskovbo.rtp.model.team;
 
+import rskovbo.rtp.model.user.User;
+
 import javax.persistence.*;
 
 @Table
-@Entity(name = "Team")
+@Entity(name = "team")
 public class Team {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(updatable = false)
+    @Column(updatable = false, name = "id")
     private Long id;
 
     @Column(nullable = false)
     private String teamName;
+
+    @OneToOne(mappedBy = "team")
+    private User user;
 
     //@Column TODO
     // private List<> stats

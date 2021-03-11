@@ -81,18 +81,46 @@
 
 </div>
 
-<!-- Jumbotron -->
-<div class="container-fluid">
-    <div class="row jumbotron">
-        <div class="col-xs-12 col-sm-12 col-md-9 col-l-9 col-xl-10">
-            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non faucibus felis. Sed purus nisi, rhoncus eu massa vitae, convallis laoreet dui.</p>
+
+<!--- League Overview -->
+<div class="container-fluid padding">
+    <div class="row welcome text-center">
+        <div class="col-12">
+            <h1 class="display-4">The Road To Pink League</h1>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-3 col-l-3 col-xl-2" style="margin: auto; padding-left: 5%">
-            <a href="#"><button type="button" class="btn btn-outline-secondary btn-lg">Test</button></a>
+        <hr>
+        <div class="col-12">
+            <div class="table-responsive" th:if="${not#lists.isEmpty(users)}">
+                <table class="table table-hover table-striped">
+                    <thead class="thead-inverse">
+                    <tr>
+                        <th>Avatar</th>
+                        <th>Username</th>
+                        <th>Team name</th>
+                    </tr>
+                    </thead>
+                    <tr th:each="user : ${users}">
+                        <td>N/A</td>
+                        <td th:text="${user.username}"></td>
+                        <td th:text="${user?.team?.teamName}"></td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </div>
 
+<!-- Jumbotron -->
+<div class="container-fluid">
+    <div class="row jumbotron">
+        <div class="col-xs-12 col-sm-12 col-md-9 col-l-9 col-xl-10">
+            <p class="lead text-center">Is your team not showing? Make sure to register a team on your profile page:</p>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-3 col-l-3 col-xl-2 text-center" style="margin: auto; padding-left: 5%">
+            <a href="#"><button type="button" class="btn btn-outline-secondary btn-lg">Team Profile</button></a>
+        </div>
+    </div>
+</div>
 
 <!--- Welcome Section -->
 <div class="container-fluid padding">
@@ -102,7 +130,8 @@
         </div>
         <hr>
         <div class="col-12">
-            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non faucibus felis. Sed purus nisi, rhoncus eu massa vitae, convallis laoreet dui.</p>
+            <p class="lead">This website is a work-in-hobby-project-progress, so make sure to tune in regularly for
+                new updates and features as they become available.</p>
         </div>
     </div>
 </div>

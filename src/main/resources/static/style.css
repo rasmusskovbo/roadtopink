@@ -179,6 +179,10 @@ hr.light {
   .card-body {
     font-size: small;
   }
+
+  .table-responsive {
+    font-size: x-small;
+  }
 }
 
 

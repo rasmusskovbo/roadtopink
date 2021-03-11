@@ -20,12 +20,10 @@ import java.util.Optional;
 public class DataService {
 
     private final UserRepository userRepository;
-    private final TeamRepository teamRepository;
 
     @Autowired
     public DataService(UserRepository userRepository, TeamRepository teamRepository) {
         this.userRepository = userRepository;
-        this.teamRepository = teamRepository;
     }
 
     public List<User> getUsers() {
@@ -44,10 +42,6 @@ public class DataService {
         return userRepository.save(user);
     }
 
-    public Team registerTeam(Team team) {
-        return teamRepository.save(team);
-    }
-
     public User login(String username, String password) throws LoginException {
         Optional<User> userOptional = userRepository.findUserByUsernameAndPw(username, password);
         if (userOptional.isEmpty()) {
@@ -59,17 +53,6 @@ public class DataService {
 
     public User getUser(Long id) {
         return userRepository.getOne(id);
-    }
-
-    public User setTeam(Team team, User user) {
-        userRepository.getOne(user.getId());
-        user.setTeamID(team.getId());
-        userRepository.save(user);
-        return user;
-    }
-
-    public Team getTeam(Long teamID) {
-        return teamRepository.getOne(teamID);
     }
 
 

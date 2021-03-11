@@ -12,6 +12,8 @@ import rskovbo.rtp.service.user.DataService;
 import rskovbo.rtp.service.user.UsernameAlreadyExists;
 
 import javax.security.auth.login.LoginException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class WebController {
@@ -90,9 +92,10 @@ public class WebController {
 
     @PostMapping("/registerTeam")
     public String registerTeam(WebRequest request, Team team) {
-        Team teamForID = dataService.registerTeam(team);
-        User userToUpdate = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
-        dataService.setTeam(teamForID, userToUpdate);
+        User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        user.setTeam(team);
+        dataService.save(user);
+
         return "redirect:/profile";
     }
 
@@ -104,14 +107,9 @@ public class WebController {
 
     private void packView(Model model, WebRequest request) {
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
-        try {
-            Team team = dataService.getTeam(user.getTeamID());
-            System.out.println(team.getTeamName());
-            model.addAttribute("team", team);
-        } catch (Exception ignored) {
-
-        }
         model.addAttribute("user", user);
+        List<User> users = dataService.getUsers();
+        model.addAttribute("users", users);
     }
 
 

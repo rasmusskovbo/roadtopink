@@ -6,5 +6,4 @@ import rskovbo.rtp.model.team.Team;
 
 @Repository
 public interface TeamRepository extends JpaRepository<Team, Long> {
-
 }
