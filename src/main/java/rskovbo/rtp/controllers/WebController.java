@@ -17,6 +17,8 @@ import rskovbo.rtp.service.user.UsernameAlreadyExists;
 import javax.security.auth.login.LoginException;
 import java.util.List;
 
+// Test
+
 @Controller
 public class WebController {
 
