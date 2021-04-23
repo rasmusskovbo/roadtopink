@@ -7,4 +7,4 @@
 * Using Docker to run images of a MySQL server as well as the SpringProject.
 * Using Jenkins for continuous implementation.
 
-### Check roadtopink.rskovbo.dk for latest version.. *Note - May not be up 24/7*
+### Check rskovbo.dk for latest version.. *Note - May not be up 24/7*
